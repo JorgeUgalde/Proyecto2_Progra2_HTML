@@ -32,45 +32,27 @@ function deleteSupplies(context) {
     divSupplies.removeChild(context.node);
 }
 
-// Agrego el evento a cada botón de borrar con la clase delete-button
-divSupplies.addEventListener('click', e => {
-    if (e.target.nodeName === 'BUTTON') {
-        if (e.target.classList.contains('delete-button')) {
-            const id = e.target.parentNode.dataset.id;
-            executeRequest(
-                'delete',
-                `http://localhost:3000/api/supplies/${id}`,
-                deleteSupplies,
-                showError,
-                null,
-                {
-                    node: e.target.parentNode
-                }
-            );
-        } else if (e.target.classList.contains('modify-button')) {
-            const id = e.target.parentNode.dataset.id;
-            location.href = `modifySupply.html?id=${id}`;
-        } else if (e.target.classList.contains('details-button')) {
-            const id = e.target.parentNode.dataset.id;
-            location.href = `details.html?id=${id}`;
-        }
-    }
-});
 
-// Agrego el evento click al botón con el id new-button
-document.getElementById('new-button').onclick = () => {
-    location.href = 'newSupply.html';
+// Agrego el evento onclick al botón con el id add-button
+document.getElementById('add-button').onclick = function () {
+    // Obtengo información del campo de entrada txt-name
+    const name = document.getElementById('txt-name').value;
+    // Creo la solicitud para el post en formato JSON
+    const data = `{ "name": "${name}" }`;
+    // Ejecuto el método post
+    executeRequest(
+        'post',
+        'http://localhost:3000/api/requisitions',
+        newSupply,
+        showError,
+        data
+    );
 };
 
-// Agrego el evento click al botón con el id new-button
-document.getElementById('requisitions-button').onclick = () => {
-    location.href = 'requisitions.html';
-};
-
-// Agrego el evento click al botón con el id new-button
-document.getElementById('orders-button').onclick = () => {
-    location.href = 'orders.html';
-};
+// Agrego el evento onclick al botón con el id back-button
+document.getElementById('back-button').onclick = () => {
+    history.go(-1);
+}
 
 // Agrego un evento para la carga de la página
 document.addEventListener('DOMContentLoaded', () => {

@@ -1,6 +1,6 @@
 // Función para modificar curso
-function modifySupply(supplie) {
-    window.alert(`${supplie.name} modifcado correctamente`);
+function modifySupply(supply) {
+    window.alert(`${supply.name} modifcado correctamente`);
     window.location.replace('supplies.html');
 }
 
@@ -10,9 +10,9 @@ function showError(message) {
 }
 
 // Función para cargar datos del curso
-function showSupplie(supplie) {
-    document.getElementById('id').value = supplie.id;
-    document.getElementById('txt-name').value = supplie.name;
+function showSupply(supply) {
+    document.getElementById('id').value = supply.id;
+    document.getElementById('txt-name').value = supply.name;
 }
 
 // Agrego el evento onclick al botón con el id modify-button
@@ -22,7 +22,7 @@ document.getElementById('modify-button').onclick = () => {
     const data = `{ "name": "${name}"}`;
     executeRequest(
         'put',
-        `http://localhost:3000/api/supplies/${id}`,
+        `http://127.0.0.1:3000/api/supplies/${id}`,
         modifySupply,
         showError,
         data
@@ -42,6 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
     executeRequest(
         'get',
         `http://127.0.0.1:3000/api/supplies/${id}`,
-        showSupplie,
+        showSupply,
         showError); // Llamo la función
 });

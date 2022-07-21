@@ -82,15 +82,15 @@ router.post('/', (req, resp) => {
 router.put('/:id', (req, resp) => {
     readSuppliesFile(resp);
     if (suppliesData) {
-        const supplie = suppliesData.supplies.find(p => p.id === parseInt(req.params.id))
-        if (!supplie) return resp.status(404).send(`Codigo ${req.params.id} no existe)`);
+        const supply = suppliesData.supplies.find(p => p.id === parseInt(req.params.id))
+        if (!supply) return resp.status(404).send(`Codigo ${req.params.id} no existe)`);
 
         const { error } = validateSupply(req.body);
         if (error) return resp.status(400).send(error.details[0].message);
 
-        supplie.name = req.body.name;
+        supply.name = req.body.name;
         fileWriter(suppliesPath, suppliesData);
-        resp.send(supplie);
+        resp.send(supply);
     }
 });
 

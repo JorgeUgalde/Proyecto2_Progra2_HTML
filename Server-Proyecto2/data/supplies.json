@@ -2,31 +2,27 @@
     "supplies": [
       {
         "id": 1,
-        "name": "IF5010"
+        "name": "Camisa",
+        "existence":5,
+        "movements":[]
       },
       {
-        "id": 2,
-        "name": "IF6000"
+        "id": 1,
+        "name": "Pantalon",
+        "existence":2,
+        "movements":[]
       },
       {
-        "id": 3,
-        "name": "IF5100"
+        "id": 1,
+        "name": "Zapatos",
+        "existence":4,
+        "movements":[]
       },
       {
-        "id": 4,
-        "name": "IF3000"
-      },
-      {
-        "id": 5,
-        "name": "IF5200"
-      },
-      {
-        "id": 6,
-        "name": "IF3001"
-      },
-      {
-        "id": 7,
-        "name": "IF7821"
+        "id": 1,
+        "name": "Medias",
+        "existence":12,
+        "movements":[]
       }
     ]
   }
