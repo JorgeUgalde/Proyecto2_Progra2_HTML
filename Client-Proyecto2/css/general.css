@@ -1,0 +1,28 @@
+body {
+  background-color: darkslategrey;
+  text-align: center;
+  color: rgb(210, 210, 208);
+  font-family: Arial, Helvetica, sans-serif;
+}
+button {
+  text-align: center;
+  background: rgb(124, 156, 156);
+  color: black;
+  padding: 8px 16px;
+  margin: 3px 2px;
+}
+
+hr {
+  margin-left: 25%;
+  margin-right: 25%;
+  size: "2";
+  background: rgb(176, 147, 147);
+}
+
+input {
+  text-align: center;
+  background: rgb(124, 156, 156);
+  color: black;
+  padding: 8px 16px;
+  margin: 3px 2px;
+}

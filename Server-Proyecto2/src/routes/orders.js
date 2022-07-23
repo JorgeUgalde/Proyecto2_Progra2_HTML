@@ -10,6 +10,7 @@ module.exports = router;
 const Joi = require('joi'); // En mayúscula porque retorna una clase
 // Importa el módulo fs
 const fs = require('fs')
+const supplies = require('./supplies.js');
 
 
 const ordersPath = './data/orders.json';
@@ -88,7 +89,7 @@ router.post('/orders', (req, resp) => {
             date: date.getDate() + '/' + date.getMonth() + 1 + '/' + date.getFullYear(),
             productsOrdered: req.body.products
         }
-        if (addProducts(resp, order.numberOrd, order.productsOrdered)) {
+        if (supplies.addProducts(resp, order.numberOrd, order.productsOrdered)) {
             ordersData.orders[index] = order;
             writeRequisitionsFile(ordersPath, ordersData);
             resp.send(order);
@@ -96,29 +97,3 @@ router.post('/orders', (req, resp) => {
     }
 });
 
-function addProducts(resp, numberOrd, productsOrdered) {
-    let movement, product;
-    for (let i = 0; i < productsOrdered.length; i++) {
-        product = ordersData.products.find(p => p.id === productsOrdered[i].id);
-        if (!product) {
-            resp.status(404).send(`Codigo ${req.params.id} no existe)`);
-            return false;
-        } else if (productsOrdered[i].units < 1) {
-            resp.status(400).send(`Debe indicar al menos una unidad del producto ${productsOrdered[i].id}`);
-        }
-    }
-
-    for (let i = 0; i < productsOrdered.length; i++) {
-        product = ordersData.products.find(p => p.id === productsOrdered[i].id);
-        movement = {
-            type: 1, //type es requisition
-            movementCode: numberOrd,
-            movementQuantity: productsOrdered[i].units
-        }
-        product.movements.push(movement);
-        product.units += productsOrdered[i].units;
-
-    }
-    fileWriter(ordersPath, ordersData);
-    return true;
-}

@@ -10,6 +10,7 @@ module.exports = router;
 const Joi = require('joi'); // En mayúscula porque retorna una clase
 // Importa el módulo fs
 const fs = require('fs');
+const supplies = require('./supplies.js');
 
 /* requisitions  */
 const requisitionsPath = './data/requisitions.json';
@@ -69,6 +70,7 @@ router.get('/:numberReq/products', (req, resp) => {
     }
 });
 
+
 router.post('/', (req, resp) => {
     readRequisitionsFile(resp);
     if (requisitionsData) {
@@ -87,43 +89,10 @@ router.post('/', (req, resp) => {
             date: date.getDate() + '/' + date.getMonth() + 1 + '/' + date.getFullYear(),
             productsRequest: req.body.products
         }
-        if (removeProducts(resp, requisition.numberReq, requisition.productsRequest)) {
+        if (supplies.removeProducts(resp, requisition.numberReq, requisition.productsRequest)) {
             requisitionsData.requisitions[index] = requisition;
             writeRequisitionsFile(requisitionsPath, requisitionsData);
             resp.send(requisition);
         }
     }
 });
-
-
-function removeProducts(resp, numberReq, productsRequested) {
-    let movement, product;
-    for (let i = 0; i < productsRequested.length; i++) {
-        product = requisitionsData.products.find(p => p.id === productsRequested[i].id);
-        if (!product) {
-            resp.status(404).send(`Codigo ${productsRequested[i].id} no existe`);
-            return false;
-        } else if (productsRequested[i].units < 1) {
-            resp.status(400).send(`Debe indicar al menos una unidad del producto ${productsRequest[i].id}`);
-            return false;
-        } else if (product.units < productsRequested[i].units) {
-            resp.status(400).send(`La cantidad de unidades ${product.units} existentes es menor a la solicitada
-             ${productsRequested[i].units} para el producto ${product.id}`);
-            return false;
-        }
-    }
-    for (let i = 0; i < productsRequested.length; i++) {
-        product = requisitionsData.products.find(p => p.id === productsRequested[i].id);
-        movement = {
-            type: 2, //type es requisition
-            movementCode: numberReq,
-            movementQuantity: productsRequested[i].units
-        }
-        product.movements.push(movement);
-        product.units -= productsRequested[i].units;
-
-    }
-    fileWriter(requisitionsPath, requisitionsData);
-    return true;
-}
-

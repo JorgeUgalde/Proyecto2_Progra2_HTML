@@ -1,28 +1,22 @@
 {
-    "supplies": [
-      {
-        "id": 1,
-        "name": "Camisa",
-        "existence":5,
-        "movements":[]
-      },
-      {
-        "id": 1,
-        "name": "Pantalon",
-        "existence":2,
-        "movements":[]
-      },
-      {
-        "id": 1,
-        "name": "Zapatos",
-        "existence":4,
-        "movements":[]
-      },
-      {
-        "id": 1,
-        "name": "Medias",
-        "existence":12,
-        "movements":[]
-      }
-    ]
-  }
+  "supplies": [
+    {
+      "id": 1,
+      "name": "Camisa de cuadros ffd",
+      "existence": 5,
+      "movements": []
+    },
+    {
+      "id": 2,
+      "name": "Pantalon",
+      "existence": 2,
+      "movements": [
+        {
+          "type": 1,
+          "movementCode": 5,
+          "movementQuantity": 2
+        }
+      ]
+    }
+  ]
+}
