@@ -10,10 +10,31 @@ function showError(message) {
     document.getElementById('responseText').innerHTML = message;
 }
 
-function showSupply(supply) {
+const divRequisition = document.getElementById('requisitionDetails'); // obtengo el tag div
+// Función para desplegar cursos al usuario
+function showRequisition(requisition) {
     // creo un fragmento
-   document.getElementById('requisition').value = supply.id;
-   document.getElementById('requisition').value = supply.name;
+    const fragment = document.createDocumentFragment();
+    const requisitionElement = document.createElement('article');
+    // defino el id del articulo
+    requisitionElement.dataset.id = requisition.numberReq;
+    // cargo el contenido
+    requisitionElement.innerHTML = `
+                    <h2>Number de requisicion: ${requisition.numberReq}</h3>
+                    <h3>Fecha: ${requisition.date}
+                    <br>Productos:
+                    </h3>
+                    `;
+    fragment.appendChild(requisitionElement); // agrego o concateno los elementos (curso)
+    requisition.productsRequested.forEach(m => {
+        const product = document.createElement('article');
+        product.dataset.id = `${requisition.numberReq}-${m.id}`
+        product.innerHTML = `
+                    <h5>ID: ${m.id}<br>Unidades: ${m.units}</h5>
+                    `;
+        fragment.appendChild(product); // agrego o concateno los elementos (curso)
+    });
+    divRequisition.appendChild(fragment); // cargo la lista de cursos (fragment) en el div
 }
 
 
@@ -30,6 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
     executeRequest(
         'get',
         `http://127.0.0.1:3000/api/requisitions/${id}`,
-        showSupply,
+        showRequisition,
         showError); // Llamo la función
 });

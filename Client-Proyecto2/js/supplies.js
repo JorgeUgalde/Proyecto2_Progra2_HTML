@@ -1,5 +1,5 @@
-const divSupplies = document.getElementById('supplies'); // obtengo el tag div
 
+const divSupplies = document.getElementById('supplies'); // obtengo el tag div
 // Función para desplegar cursos al usuario
 function showSupplies(supplies) {
     // creo un fragmento
@@ -7,17 +7,19 @@ function showSupplies(supplies) {
     // recorre la respuesta
     supplies.forEach(c => {
         // creo un objeto de tipo artículo
-        const supplieElement = document.createElement('article');
+        const supplyElement = document.createElement('article');
         // defino el id del articulo
-        supplieElement.dataset.id = c.id;
+        supplyElement.dataset.id = c.id;
         // cargo el contenido
-        supplieElement.innerHTML = `
+        supplyElement.innerHTML = `
                     <h3>${c.name}</h3>
+                    <h3>Cantidad disponible: ${c.existence}</h3>
                     <button class="details-button">Ver detalles</button>
                     <button class="modify-button">Modificar</button>
-                    <button class="delete-button">Eliminar</button>
+                    <button class="delete-button">Eliminar movimientos</button>
+                    <br><hr>
                     `;
-        fragment.appendChild(supplieElement); // agrego o concateno los elementos (curso)
+        fragment.appendChild(supplyElement); // agrego o concateno los elementos (curso)
     });
     divSupplies.appendChild(fragment); // cargo la lista de cursos (fragment) en el div
 }
@@ -37,16 +39,7 @@ divSupplies.addEventListener('click', e => {
     if (e.target.nodeName === 'BUTTON') {
         if (e.target.classList.contains('delete-button')) {
             const id = e.target.parentNode.dataset.id;
-            executeRequest(
-                'delete',
-                `http://localhost:3000/api/supplies/${id}`,
-                deleteSupplies,
-                showError,
-                null,
-                {
-                    node: e.target.parentNode
-                }
-            );
+            location.href = `deleteMovements.html?id=${id}`;
         } else if (e.target.classList.contains('modify-button')) {
             const id = e.target.parentNode.dataset.id;
             location.href = `modifySupply.html?id=${id}`;
@@ -80,3 +73,4 @@ document.addEventListener('DOMContentLoaded', () => {
         showSupplies,
         showError); // Llamo la función
 });
+

@@ -22,7 +22,7 @@ document.getElementById('modify-button').onclick = () => {
     const data = `{ "name": "${name}"}`;
     executeRequest(
         'put',
-        `http://127.0.0.1:3000/api/supplies/${id}`,
+        `http://localhost:3000/api/supplies/${id}`,
         modifySupply,
         showError,
         data

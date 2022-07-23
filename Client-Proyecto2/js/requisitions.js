@@ -1,4 +1,4 @@
-const divRequisition = document.getElementById('requisitions'); // obtengo el tag div
+const divRequisitions = document.getElementById('requisitions'); // obtengo el tag div
 
 // Función para desplegar cursos al usuario
 function showRequisitions(requisitions) {
@@ -12,11 +12,12 @@ function showRequisitions(requisitions) {
         requisitionElement.dataset.id = c.id;
         // cargo el contenido
         requisitionElement.innerHTML = `
-                    <h3>${c.name}</h3>
+                    <h3>Numero de requisicion: ${c.numberReq}
+                    <br>fecha de requisicion: ${c.date}</h3>
                     <button class="details-button">Ver detalle</button>`;
         fragment.appendChild(requisitionElement); // agrego o concateno los elementos (curso)
     });
-    divRequisition.appendChild(fragment); // cargo la lista de cursos (fragment) en el div
+    divRequisitions.appendChild(fragment); // cargo la lista de cursos (fragment) en el div
 }
 
 // Función para mostrar error al usuario
@@ -26,11 +27,11 @@ function showError(message) {
 
 // Función para eliminar un curso
 function deleteRequisition(context) {
-    divRequisition.removeChild(context.node);
+    divRequisitions.removeChild(context.node);
 }
 
 // Agrego el evento a cada botón de borrar con la clase delete-button
-divRequisition.addEventListener('click', e => {
+divRequisitions.addEventListener('click', e => {
     if (e.target.nodeName === 'BUTTON') {
         if (e.target.classList.contains('details-button')) {
             const id = e.target.parentNode.dataset.id;
@@ -49,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     executeRequest(
         'get',
         'http://127.0.0.1:3000/api/requisitions',
-        showSupplies,
+        showRequisitions,
         showError); // Llamo la función
 });
 
