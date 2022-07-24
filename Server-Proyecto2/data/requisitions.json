@@ -39,8 +39,52 @@
       "date": "23/61/2022",
       "productsRequested": [
         {
-          "id": 2,
-          "units": 12
+          "id": "1",
+          "units": "3"
+        }
+      ]
+    },
+    {
+      "numberReq": 5,
+      "date": "23/61/2022",
+      "productsRequested": [
+        {
+          "id": "2",
+          "units": "7"
+        },
+        {
+          "id": "4",
+          "units": "5"
+        }
+      ]
+    },
+    {
+      "numberReq": 6,
+      "date": "23/61/2022",
+      "productsRequested": [
+        {
+          "id": "3",
+          "units": "2"
+        }
+      ]
+    },
+    {
+      "numberReq": 7,
+      "date": "23/61/2022",
+      "productsRequested": [
+        {
+          "id": "1",
+          "units": "4"
+        }
+      ]
+    },
+    {
+      "numberReq": 8,
+      "date": "24/61/2022",
+      "productsRequested": [
+        {
+          "id": "2",
+          "units": "13"
         }
       ]
     }

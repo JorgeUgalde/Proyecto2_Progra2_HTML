@@ -1,12 +1,6 @@
-function newOrder(order) {
-    if (order.length === 0) {
-        window.alert(`${order.numberOrd} , Error al realizar la orden`);
-    } else {
-        
-        window.alert(`${order.numberOrd} agregado correctamente`);
-        window.location.replace('supplies.html');
-    }
-
+function newSupply(response) {
+    window.alert(`${response.numberOrd} agregado correctamente`);
+    window.location.replace('supplies.html');
 }
 
 const divSupplies = document.getElementById('supplies'); // obtengo el tag div
@@ -24,25 +18,22 @@ function showSupplies(supplies) {
             supplieElement.dataset.id = c.id;
             // cargo el contenido
             supplieElement.innerHTML = `
-        <input class="checkBoxElements" type="checkbox">
-        Prenda: ${c.name}
-        <input class='existence'type="number" value="1" min="1" max='${c.existence}'>
-        `;
+            <input class="checkBoxElements" type="checkbox">
+            Prenda: ${c.name}
+            <input class='existence'type="number" value="1" min="1" '>
+            `;
             fragment.appendChild(supplieElement); // agrego o concateno los elementos (curso)
         }
     });
     divSupplies.appendChild(fragment); // cargo la lista de cursos (fragment) en el div
 }
-
 /* setear clase checkBox,  */
 // Función para mostrar error al usuario
-
 function showError(message) {
     document.getElementById('supplies').innerHTML = message;
 }
 
 function getSelectedElements() {
-
     const elements = document.getElementsByClassName("checkBoxElements");
     const purchased = [];
     if (elements.length > 0) {
@@ -63,7 +54,6 @@ function getSelectedElements() {
     return purchased;
 }
 
-
 // Agrego el evento onclick al botón con el id back-button
 document.getElementById('back-button').onclick = () => {
     history.go(-1);
@@ -71,16 +61,18 @@ document.getElementById('back-button').onclick = () => {
 
 // Agrego el evento onclick al botón con el id add-button
 document.getElementById('create-button').onclick = function () {
-    // Obtengo información del campo de entrada txt-name
-    // Creo la solicitud para el post en formato JSON      *****************************************************
     // Ejecuto el método post
+    const data = JSON.stringify({
+        "products": getSelectedElements()
+    });
+    console.log(data);
     executeRequest(
         'post',
         'http://127.0.0.1:3000/api/orders',
-        newOrder,
+        newSupply,
         showError,
-        getSelectedElements
-    )
+        data
+    );
 };
 
 // Agrego un evento para la carga de la página

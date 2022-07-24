@@ -17,6 +17,9 @@ app.set('json spaces', 2);
  app.use('/api/orders', require('./routes/orders')) // directorio de cursos que contiene los verbos (get, post, put, delete)
  app.use('/api/supplies', require('./routes/supplies')) // directorio de cursos que contiene los verbos (get, post, put, delete)
  app.use('/api/requisitions', require('./routes/requisitions')) // directorio de cursos que contiene los verbos (get, post, put, delete)
+ app.use('/api/login', require('./routes/login')) // directorio de cursos que contiene los verbos (get, post, put, delete)
+ app.use('/api/register', require('./routes/register')) // directorio de cursos que contiene los verbos (get, post, put, delete)
+ 
 
 // Inicializo la aplicación
 const port = process.env.PORT || 3000;

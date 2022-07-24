@@ -89,6 +89,7 @@ router.post('/', (req, resp) => {
             date: date.getDate() + '/' + date.getMonth() + 1 + '/' + date.getFullYear(),
             productsRequested: req.body.products
         }
+
         if (supplies.removeProducts(resp, requisition.numberReq, requisition.productsRequested)) {
             requisitionsData.requisitions[index] = requisition;
             writeRequisitionsFile(requisitionsPath, requisitionsData);

@@ -1,24 +1,44 @@
 {
-    "orders": [
+  "orders": [
+    {
+      "numberOrd": 1,
+      "date": "14/09/2022",
+      "purchased": [
         {
-            "numberOrd": 1,
-            "date": "14/89/2022",
-            "purchased": [
-                {
-                    "id": 3,
-                    "units": 15
-                }
-            ]
-        },
+          "id": 3,
+          "units": 15
+        }
+      ]
+    },
+    {
+      "numberOrd": 2,
+      "date": "14/07/2022",
+      "purchased": [
         {
-            "numberOrd": 2,
-            "date": "114/7/2022",
-            "purchased": [
-              {
-                "id": 3,
-                "units": 15
-              }
-            ]
-          }
-    ]
+          "id": 3,
+          "units": 15
+        }
+      ]
+    },
+    {
+      "numberOrd": 3,
+      "date": "23/61/2022",
+      "purchased": [
+        {
+          "id": "1",
+          "units": "3"
+        }
+      ]
+    },
+    {
+      "numberOrd": 4,
+      "date": "23/61/2022",
+      "purchased": [
+        {
+          "id": "3",
+          "units": "5"
+        }
+      ]
+    }
+  ]
 }

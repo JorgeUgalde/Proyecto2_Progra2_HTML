@@ -137,7 +137,7 @@ function removeProducts(resp, numberReq, productsRequested) {
     readSuppliesFile(resp);
     let movement, product;
     for (let i = 0; i < productsRequested.length; i++) {
-        product = suppliesData.supplies.find(p => p.id === productsRequested[i].id);
+        product = suppliesData.supplies.find(p => p.id === parseInt(productsRequested[i].id));
         if (!product) {
             resp.status(404).send(`Codigo ${productsRequested[i].id} no existe`);
             return false;
@@ -151,14 +151,14 @@ function removeProducts(resp, numberReq, productsRequested) {
         }
     }
     for (let i = 0; i < productsRequested.length; i++) {
-        product = suppliesData.supplies.find(p => p.id === productsRequested[i].id);
+        product = suppliesData.supplies.find(p => p.id ===  parseInt(productsRequested[i].id));
         movement = {
             type: 2, //type es requisition
             movementCode: numberReq,
             movementQuantity: productsRequested[i].units
         }
         product.movements.push(movement);
-        product.units -= productsRequested[i].units;
+        product.existence -= productsRequested[i].units;
 
     }
     fileWriter(suppliesPath, suppliesData);
@@ -170,7 +170,7 @@ module.exports.addProducts = addProducts;
 function addProducts(resp, numberOrd, productsOrdered) {
     let movement, product;
     for (let i = 0; i < productsOrdered.length; i++) {
-        product = suppliesData.supplies.find(p => p.id === productsOrdered[i].id);
+        product = suppliesData.supplies.find(p => p.id ===  parseInt(productsOrdered[i].id));
         if (!product) {
             resp.status(404).send(`Codigo ${req.params.id} no existe)`);
             return false;
@@ -180,14 +180,14 @@ function addProducts(resp, numberOrd, productsOrdered) {
     }
 
     for (let i = 0; i < productsOrdered.length; i++) {
-        product = suppliesData.supplies.find(p => p.id === productsOrdered[i].id);
+        product = suppliesData.supplies.find(p => p.id ===  parseInt(productsOrdered[i].id));
         movement = {
-            type: 1, //type es requisition
+            type: 1, //type es orden
             movementCode: numberOrd,
             movementQuantity: productsOrdered[i].units
         }
         product.movements.push(movement);
-        product.units += productsOrdered[i].units;
+        product.existence += productsOrdered[i].units;
 
     }
     fileWriter(suppliesPath, suppliesData);

@@ -30,8 +30,16 @@ function showRequisition(supply) {
     supply.movements.forEach(m => {
         const movement = document.createElement('article');
         movement.dataset.id = `${supply.id}-${m.movementCode}`
+        let movementType;
+        if (parseInt(m.type) === 2) {
+            movementType = "Requisicion";
+        }else{
+            movementType = "Orden";
+        } 
+
+    
         movement.innerHTML = `
-                    <h5>Tipo: ${m.type}<br>Codigo: ${m.movementCode}<br>Cantidad: ${m.movementQuantity}</h5>
+                    <h5>Tipo: ${movementType}<br>Codigo: ${m.movementCode}<br>Cantidad: ${m.movementQuantity}</h5>
                     `;
         fragment.appendChild(movement); // agrego o concateno los elementos (curso)
     });

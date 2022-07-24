@@ -1,10 +1,6 @@
-function newSupply(supply) {
-    if (supply.length === 0) {
-        window.alert(`${supply.numberReq} , Error al realizar la requisicion`);
-    } else {
-        window.alert(`${supply.numberReq} agregado correctamente`);
+function newSupply(response) {
+        window.alert(`${response.numberReq} agregado correctamente`);
         window.location.replace('supplies.html');
-    }
 }
 
 const divSupplies = document.getElementById('supplies'); // obtengo el tag div
@@ -38,13 +34,11 @@ function showError(message) {
 }
 
 function getSelectedElements() {
-
     const elements = document.getElementsByClassName("checkBoxElements");
     const productsRequest = [];
     if (elements.length > 0) {
         const array = Array.from(elements);
         array.forEach(e => {
-
             if (e.checked) {
                 const node = e.parentNode;
                 const id = node.dataset.id;
@@ -57,19 +51,6 @@ function getSelectedElements() {
             }
         });
     }
-    return productsRequest;
-}
-
-function generateElement() {
-    const ids = getSelectedElements();
-    const productsRequest = [];
-    ids.forEach(id => {
-        const element = {
-            "id": id,
-            "units": 0
-        }
-        productsRequest.push(element);
-    });
     return productsRequest;
 }
 
@@ -88,13 +69,18 @@ document.getElementById('create-button').onclick = function () {
     // Obtengo información del campo de entrada txt-name
     // Creo la solicitud para el post en formato JSON   ******************************************************
     // Ejecuto el método post
+    const data = JSON.stringify({
+        "products": getSelectedElements()
+    });
+
+
     executeRequest(
         'post',
         'http://127.0.0.1:3000/api/requisitions',
         newSupply,
         showError,
-        getSelectedElements
-    )
+        data
+    );
 };
 
 // Agrego un evento para la carga de la página

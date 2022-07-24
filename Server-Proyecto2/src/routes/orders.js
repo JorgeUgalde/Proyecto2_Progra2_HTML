@@ -71,7 +71,7 @@ router.get('/api/orders/:numberOrd/products', (req, resp) => {
     }
 });
 
-router.post('/orders', (req, resp) => {
+router.post('/', (req, resp) => {
     readOrdersFile(resp);
     if (ordersData) {
         const schema = Joi.object({
