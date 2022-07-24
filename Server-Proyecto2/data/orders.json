@@ -2,41 +2,15 @@
   "orders": [
     {
       "numberOrd": 1,
-      "date": "14/09/2022",
-      "purchased": [
-        {
-          "id": 3,
-          "units": 15
-        }
-      ]
-    },
-    {
-      "numberOrd": 2,
-      "date": "14/07/2022",
-      "purchased": [
-        {
-          "id": 3,
-          "units": 15
-        }
-      ]
-    },
-    {
-      "numberOrd": 3,
-      "date": "23/61/2022",
+      "date": "24/61/2022",
       "purchased": [
         {
           "id": "1",
           "units": "3"
-        }
-      ]
-    },
-    {
-      "numberOrd": 4,
-      "date": "23/61/2022",
-      "purchased": [
+        },
         {
-          "id": "3",
-          "units": "5"
+          "id": "4",
+          "units": "1"
         }
       ]
     }

@@ -41,7 +41,7 @@ divRequisitions.addEventListener('click', e => {
 });
 
 // Agrego el evento click al botón con el id new-button
-document.getElementById('new-button').onclick = () => {
+document.getElementById('new-requisition').onclick = () => {
     location.href = 'newRequisition.html';
 };
 
@@ -58,3 +58,16 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('back-button').onclick = () => {
     history.go(-1);
 }
+const divHeader = document.getElementById("header");
+
+divHeader.addEventListener('click', e => {
+    if (e.target.nodeName === 'BUTTON') {
+        if (e.target.classList.contains('requisitions-button')) {
+            location.href = `requisitions.html`;
+        } else if (e.target.classList.contains('orders-button')) {
+            location.href = `orders.html`;
+        } else if (e.target.classList.contains('supplies-button')) {
+            location.href = `supplies.html`;
+        }
+    }
+});

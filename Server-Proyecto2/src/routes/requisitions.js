@@ -86,7 +86,7 @@ router.post('/', (req, resp) => {
         const index = requisitionsData.requisitions.length;
         const requisition = {
             numberReq: index + 1,
-            date: date.getDate() + '/' + date.getMonth() + 1 + '/' + date.getFullYear(),
+            date: date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear(),
             productsRequested: req.body.products
         }
 

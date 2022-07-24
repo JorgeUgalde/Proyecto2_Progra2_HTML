@@ -37,7 +37,7 @@ divOrders.addEventListener('click', e => {
 });
 
 // Agrego el evento click al botón con el id new-button
-document.getElementById('new-button').onclick = () => {
+document.getElementById('new-order').onclick = () => {
     location.href = 'newOrder.html';
 };
 
@@ -48,6 +48,23 @@ document.addEventListener('DOMContentLoaded', () => {
         'http://127.0.0.1:3000/api/orders',
         showOrders,
         showError); // Llamo la función
+});
+
+const divHeader = document.getElementById("header");
+
+divHeader.addEventListener('click', e => {
+    if (e.target.nodeName === 'BUTTON') {
+        if (e.target.classList.contains('requisitions-button')) {
+            const id = e.target.parentNode.dataset.id;
+            location.href = `requisitions.html`;
+        } else if (e.target.classList.contains('orders-button')) {
+            const id = e.target.parentNode.dataset.id;
+            location.href = `orders.html`;
+        } else if (e.target.classList.contains('supplies-button')) {
+            const id = e.target.parentNode.dataset.id;
+            location.href = `supplies.html`;
+        }
+    }
 });
 
 // Agrego el evento onclick al botón con el id back-button

@@ -71,15 +71,17 @@ router.get('/:id/movements', (req, resp) => {
 router.post('/', (req, resp) => {
     readSuppliesFile(resp);
     if (suppliesData) {
+        console.log(req.body)
         const { error } = validateSupply(req.body);
-        if (error) return resp.status(400).send(error.details[0].message);
+        if (error) return resp.status(400).send(error.details[0].message );
 
         const index = suppliesData.supplies.length;
         const supply = {
             id: index + 1,
             name: req.body.name,
             existence: 0,
-            movements: []
+            movements: [],
+            img: req.body.img
         }
         suppliesData.supplies.push(supply);
         fileWriter(suppliesPath, suppliesData);
@@ -119,18 +121,12 @@ router.delete('/:id', (req, resp) => {
 
 function validateSupply(supply) {
     const schema = Joi.object({
-        name: Joi.string().min(3).required()
+        name: Joi.string().min(3).required(),
+        img: Joi.string()
     });
     return schema.validate(supply);
 }
 
-function sortByField(supplies, sortKey) {
-    if (supplies) {
-        supplies.sort((p1, p2) => {
-            return p1[sortKey] > p2[sortKey] ? 1 : -1;
-        });
-    }
-}
 
 module.exports.removeProducts = removeProducts;
 function removeProducts(resp, numberReq, productsRequested) {
@@ -187,7 +183,7 @@ function addProducts(resp, numberOrd, productsOrdered) {
             movementQuantity: productsOrdered[i].units
         }
         product.movements.push(movement);
-        product.existence += productsOrdered[i].units;
+        product.existence += parseInt(productsOrdered[i].units);
 
     }
     fileWriter(suppliesPath, suppliesData);

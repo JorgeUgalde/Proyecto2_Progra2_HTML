@@ -9,6 +9,7 @@ function showError(message) {
     alert(message);
 }
 
+
 function handleLogin(resp) {
     console.log(resp);
     window.location.replace('/web/supplies.html');

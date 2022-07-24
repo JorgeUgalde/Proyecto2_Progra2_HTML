@@ -11,19 +11,19 @@ function showSupplies(supplies) {
     const fragment = document.createDocumentFragment();
     // recorre la respuesta
     supplies.forEach(c => {
-        if (parseInt(c.existence) > 0) {
-            // creo un objeto de tipo artículo
-            const supplieElement = document.createElement('article');
-            // defino el id del articulo
-            supplieElement.dataset.id = c.id;
-            // cargo el contenido
-            supplieElement.innerHTML = `
+
+        // creo un objeto de tipo artículo
+        const supplieElement = document.createElement('article');
+        // defino el id del articulo
+        supplieElement.dataset.id = c.id;
+        // cargo el contenido
+        supplieElement.innerHTML = `
             <input class="checkBoxElements" type="checkbox">
             Prenda: ${c.name}
             <input class='existence'type="number" value="1" min="1" '>
             `;
-            fragment.appendChild(supplieElement); // agrego o concateno los elementos (curso)
-        }
+        fragment.appendChild(supplieElement); // agrego o concateno los elementos (curso)
+
     });
     divSupplies.appendChild(fragment); // cargo la lista de cursos (fragment) en el div
 }
@@ -32,6 +32,23 @@ function showSupplies(supplies) {
 function showError(message) {
     document.getElementById('supplies').innerHTML = message;
 }
+
+const divHeader = document.getElementById("header");
+
+divHeader.addEventListener('click', e => {
+    if (e.target.nodeName === 'BUTTON') {
+        if (e.target.classList.contains('requisitions-button')) {
+            const id = e.target.parentNode.dataset.id;
+            location.href = `requisitions.html`;
+        } else if (e.target.classList.contains('orders-button')) {
+            const id = e.target.parentNode.dataset.id;
+            location.href = `orders.html`;
+        } else if (e.target.classList.contains('supplies-button')) {
+            const id = e.target.parentNode.dataset.id;
+            location.href = `supplies.html`;
+        }
+    }
+});
 
 function getSelectedElements() {
     const elements = document.getElementsByClassName("checkBoxElements");

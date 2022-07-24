@@ -47,18 +47,13 @@ router.post('/', (req, resp) => {
     if (loginData) {
         const { error } = validateUser(req.body);
         if (error) return resp.status(400).send(error.details[0].message);
-       
-
         const user = loginData.users.find(u => {
             return u.email === req.body.email && u.password === req.body.password 
         })
         if (!user) return resp.status(404).send(`Credenciales incorrecto`);
-
-       
         resp.send({"email" : user.email});
     }
 });
-
 
 
 function validateUser(user) {

@@ -33,6 +33,23 @@ function showError(message) {
     document.getElementById('supplies').innerHTML = message;
 }
 
+const divHeader = document.getElementById("header");
+
+divHeader.addEventListener('click', e => {
+    if (e.target.nodeName === 'BUTTON') {
+        if (e.target.classList.contains('requisitions-button')) {
+            const id = e.target.parentNode.dataset.id;
+            location.href = `requisitions.html`;
+        } else if (e.target.classList.contains('orders-button')) {
+            const id = e.target.parentNode.dataset.id;
+            location.href = `orders.html`;
+        } else if (e.target.classList.contains('supplies-button')) {
+            const id = e.target.parentNode.dataset.id;
+            location.href = `supplies.html`;
+        }
+    }
+});
+
 function getSelectedElements() {
     const elements = document.getElementsByClassName("checkBoxElements");
     const productsRequest = [];

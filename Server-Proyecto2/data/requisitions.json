@@ -2,66 +2,12 @@
   "requisitions": [
     {
       "numberReq": 1,
-      "date": "14/7/2022",
-      "productsRequested": [
-        {
-          "id": 3,
-          "units": 15
-        }
-      ]
-    },
-    {
-      "numberReq": 2,
-      "date": "12/7/2022",
-      "productsRequested": [
-        {
-          "id": 8,
-          "units": 19
-        }
-      ]
-    },
-    {
-      "numberReq": 3,
-      "date": "15/9/2022",
-      "productsRequested": [
-        {
-          "id": 2,
-          "units": 15
-        },
-        {
-          "id": 1,
-          "units": 7
-        }
-      ]
-    },
-    {
-      "numberReq": 4,
-      "date": "23/61/2022",
-      "productsRequested": [
-        {
-          "id": "1",
-          "units": "3"
-        }
-      ]
-    },
-    {
-      "numberReq": 5,
-      "date": "23/61/2022",
+      "date": "24/61/2022",
       "productsRequested": [
         {
           "id": "2",
-          "units": "7"
+          "units": "2"
         },
-        {
-          "id": "4",
-          "units": "5"
-        }
-      ]
-    },
-    {
-      "numberReq": 6,
-      "date": "23/61/2022",
-      "productsRequested": [
         {
           "id": "3",
           "units": "2"
@@ -69,22 +15,26 @@
       ]
     },
     {
-      "numberReq": 7,
-      "date": "23/61/2022",
+      "numberReq": 2,
+      "date": "24/61/2022",
       "productsRequested": [
         {
           "id": "1",
           "units": "4"
+        },
+        {
+          "id": "3",
+          "units": "3"
         }
       ]
     },
     {
-      "numberReq": 8,
-      "date": "24/61/2022",
+      "numberReq": 3,
+      "date": "24/7/2022",
       "productsRequested": [
         {
-          "id": "2",
-          "units": "13"
+          "id": "4",
+          "units": "3"
         }
       ]
     }

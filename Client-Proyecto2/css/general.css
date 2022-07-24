@@ -27,11 +27,38 @@ input {
   margin: 3px 2px;
 }
 
-img{
+img {
   margin: 5px;
   padding: 5px;
   width: 140px;
   height: 180px;
 }
 
+#header {
+  text-align: center;
+  background: rgb(123, 123, 169);
+}
 
+.navigator {
+  font-size: 25px;
+}
+
+#title {
+  color: rgb(20, 35, 35);
+  font-family: cursive;
+}
+
+#icon{
+  padding: 0px;
+  margin-top: opx;
+  float: left;
+}
+
+#footer{
+  text-align: center;
+  background: rgb(123, 123, 169);
+  font-size: 25px;
+  margin: 5px;
+  color: black;
+  
+}

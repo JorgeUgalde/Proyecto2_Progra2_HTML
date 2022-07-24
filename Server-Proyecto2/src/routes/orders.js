@@ -86,7 +86,7 @@ router.post('/', (req, resp) => {
 
         const order = {
             numberOrd: index + 1,
-            date: date.getDate() + '/' + date.getMonth() + 1 + '/' + date.getFullYear(),
+            date: date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear(),
             purchased: req.body.products
         }
         if (supplies.addProducts(resp, order.numberOrd, order.purchased)) {

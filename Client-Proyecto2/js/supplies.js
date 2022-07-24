@@ -47,24 +47,36 @@ divSupplies.addEventListener('click', e => {
         } else if (e.target.classList.contains('details-button')) {
             const id = e.target.parentNode.dataset.id;
             location.href = `details.html?id=${id}`;
+        } else if (e.target.classList.contains('requisitions-button')) {
+            const id = e.target.parentNode.dataset.id;
+            location.href = `requisitions.html`;
+        } else if (e.target.classList.contains('orders-button')) {
+            const id = e.target.parentNode.dataset.id;
+            location.href = `orders.html`;
+        } else if (e.target.classList.contains('supplies-button')) {
+            const id = e.target.parentNode.dataset.id;
+            location.href = `supplies.html`;
         }
     }
 });
 
-// Agrego el evento click al botón con el id new-button
-document.getElementById('new-button').onclick = () => {
-    location.href = 'newSupply.html';
-};
+const divHeader = document.getElementById("header");
 
-// Agrego el evento click al botón con el id new-button
-document.getElementById('requisitions-button').onclick = () => {
-    location.href = 'requisitions.html';
-};
+divHeader.addEventListener('click', e => {
+    if (e.target.nodeName === 'BUTTON') {
+        if (e.target.classList.contains('requisitions-button')) {
+            const id = e.target.parentNode.dataset.id;
+            location.href = `requisitions.html`;
+        } else if (e.target.classList.contains('orders-button')) {
+            const id = e.target.parentNode.dataset.id;
+            location.href = `orders.html`;
+        } else if (e.target.classList.contains('supplies-button')) {
+            const id = e.target.parentNode.dataset.id;
+            location.href = `supplies.html`;
+        }
+    }
+});
 
-// Agrego el evento click al botón con el id new-button
-document.getElementById('orders-button').onclick = () => {
-    location.href = 'orders.html';
-};
 
 // Agrego un evento para la carga de la página
 document.addEventListener('DOMContentLoaded', () => {

@@ -43,6 +43,23 @@ document.getElementById('back-button').onclick = () => {
     history.go(-1);
 }
 
+const divHeader = document.getElementById("header");
+
+divHeader.addEventListener('click', e => {
+    if (e.target.nodeName === 'BUTTON') {
+        if (e.target.classList.contains('requisitions-button')) {
+            const id = e.target.parentNode.dataset.id;
+            location.href = `requisitions.html`;
+        } else if (e.target.classList.contains('orders-button')) {
+            const id = e.target.parentNode.dataset.id;
+            location.href = `orders.html`;
+        } else if (e.target.classList.contains('supplies-button')) {
+            const id = e.target.parentNode.dataset.id;
+            location.href = `supplies.html`;
+        }
+    }
+});
+
 // Agrego un evento para la carga de la página que recupere y llene los datos del curso
 document.addEventListener('DOMContentLoaded', () => {
     const queryString = window.location.search;
