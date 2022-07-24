@@ -87,9 +87,9 @@ router.post('/orders', (req, resp) => {
         const order = {
             numberOrd: index + 1,
             date: date.getDate() + '/' + date.getMonth() + 1 + '/' + date.getFullYear(),
-            productsOrdered: req.body.products
+            purchased: req.body.products
         }
-        if (supplies.addProducts(resp, order.numberOrd, order.productsOrdered)) {
+        if (supplies.addProducts(resp, order.numberOrd, order.purchased)) {
             ordersData.orders[index] = order;
             writeRequisitionsFile(ordersPath, ordersData);
             resp.send(order);

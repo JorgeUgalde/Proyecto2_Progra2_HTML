@@ -78,7 +78,7 @@ router.post('/', (req, resp) => {
         const supply = {
             id: index + 1,
             name: req.body.name,
-            units: 0,
+            existence: 0,
             movements: []
         }
         suppliesData.supplies.push(supply);
@@ -125,8 +125,7 @@ function validateSupply(supply) {
 }
 
 function sortByField(supplies, sortKey) {
-    readSuppliesFile(resp);
-    if (suppliesData) {
+    if (supplies) {
         supplies.sort((p1, p2) => {
             return p1[sortKey] > p2[sortKey] ? 1 : -1;
         });
@@ -134,11 +133,11 @@ function sortByField(supplies, sortKey) {
 }
 
 module.exports.removeProducts = removeProducts;
-
 function removeProducts(resp, numberReq, productsRequested) {
+    readSuppliesFile(resp);
     let movement, product;
     for (let i = 0; i < productsRequested.length; i++) {
-        product = requisitionsData.products.find(p => p.id === productsRequested[i].id);
+        product = suppliesData.supplies.find(p => p.id === productsRequested[i].id);
         if (!product) {
             resp.status(404).send(`Codigo ${productsRequested[i].id} no existe`);
             return false;
@@ -152,7 +151,7 @@ function removeProducts(resp, numberReq, productsRequested) {
         }
     }
     for (let i = 0; i < productsRequested.length; i++) {
-        product = requisitionsData.products.find(p => p.id === productsRequested[i].id);
+        product = suppliesData.supplies.find(p => p.id === productsRequested[i].id);
         movement = {
             type: 2, //type es requisition
             movementCode: numberReq,
@@ -167,10 +166,11 @@ function removeProducts(resp, numberReq, productsRequested) {
 }
 module.exports.addProducts = addProducts;
 
+
 function addProducts(resp, numberOrd, productsOrdered) {
     let movement, product;
     for (let i = 0; i < productsOrdered.length; i++) {
-        product = ordersData.products.find(p => p.id === productsOrdered[i].id);
+        product = suppliesData.supplies.find(p => p.id === productsOrdered[i].id);
         if (!product) {
             resp.status(404).send(`Codigo ${req.params.id} no existe)`);
             return false;
@@ -180,7 +180,7 @@ function addProducts(resp, numberOrd, productsOrdered) {
     }
 
     for (let i = 0; i < productsOrdered.length; i++) {
-        product = ordersData.products.find(p => p.id === productsOrdered[i].id);
+        product = suppliesData.supplies.find(p => p.id === productsOrdered[i].id);
         movement = {
             type: 1, //type es requisition
             movementCode: numberOrd,
@@ -193,3 +193,7 @@ function addProducts(resp, numberOrd, productsOrdered) {
     fileWriter(suppliesPath, suppliesData);
     return true;
 }
+
+
+
+

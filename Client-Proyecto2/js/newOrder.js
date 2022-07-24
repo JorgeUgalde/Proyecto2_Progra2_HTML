@@ -1,10 +1,12 @@
-function newSupply(supply) {
-    if (supply.length === 0) {
-        window.alert(`${supply.numberReq} , Error al realizar la requisicion`);
+function newOrder(order) {
+    if (order.length === 0) {
+        window.alert(`${order.numberOrd} , Error al realizar la orden`);
     } else {
-        window.alert(`${supply.numberReq} agregado correctamente`);
+        
+        window.alert(`${order.numberOrd} agregado correctamente`);
         window.location.replace('supplies.html');
     }
+
 }
 
 const divSupplies = document.getElementById('supplies'); // obtengo el tag div
@@ -31,8 +33,10 @@ function showSupplies(supplies) {
     });
     divSupplies.appendChild(fragment); // cargo la lista de cursos (fragment) en el div
 }
+
 /* setear clase checkBox,  */
 // Función para mostrar error al usuario
+
 function showError(message) {
     document.getElementById('supplies').innerHTML = message;
 }
@@ -40,11 +44,10 @@ function showError(message) {
 function getSelectedElements() {
 
     const elements = document.getElementsByClassName("checkBoxElements");
-    const productsRequest = [];
+    const purchased = [];
     if (elements.length > 0) {
         const array = Array.from(elements);
         array.forEach(e => {
-
             if (e.checked) {
                 const node = e.parentNode;
                 const id = node.dataset.id;
@@ -53,30 +56,13 @@ function getSelectedElements() {
                     "id": id,
                     "units": value
                 };
-                productsRequest.push(element);
+                purchased.push(element);
             }
         });
     }
-    return productsRequest;
+    return purchased;
 }
 
-function generateElement() {
-    const ids = getSelectedElements();
-    const productsRequest = [];
-    ids.forEach(id => {
-        const element = {
-            "id": id,
-            "units": 0
-        }
-        productsRequest.push(element);
-    });
-    return productsRequest;
-}
-
-// Función para eliminar un curso
-function deleteSupplies(context) {
-    divSupplies.removeChild(context.node);
-}
 
 // Agrego el evento onclick al botón con el id back-button
 document.getElementById('back-button').onclick = () => {
@@ -86,12 +72,12 @@ document.getElementById('back-button').onclick = () => {
 // Agrego el evento onclick al botón con el id add-button
 document.getElementById('create-button').onclick = function () {
     // Obtengo información del campo de entrada txt-name
-    // Creo la solicitud para el post en formato JSON   ******************************************************
+    // Creo la solicitud para el post en formato JSON      *****************************************************
     // Ejecuto el método post
     executeRequest(
         'post',
-        'http://127.0.0.1:3000/api/requisitions',
-        newSupply,
+        'http://127.0.0.1:3000/api/orders',
+        newOrder,
         showError,
         getSelectedElements
     )

@@ -9,7 +9,7 @@ function showOrders(orders) {
         // creo un objeto de tipo artículo
         const orderElement = document.createElement('article');
         // defino el id del articulo
-        orderElement.dataset.id = c.id;
+        orderElement.dataset.id = c.numberOrd;
         // cargo el contenido
         orderElement.innerHTML = `
                     <h3>Numero de orden: ${c.numberOrd}

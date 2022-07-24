@@ -9,7 +9,7 @@ function showRequisitions(requisitions) {
         // creo un objeto de tipo artículo
         const requisitionElement = document.createElement('article');
         // defino el id del articulo
-        requisitionElement.dataset.id = c.id;
+        requisitionElement.dataset.id = c.numberReq;
         // cargo el contenido
         requisitionElement.innerHTML = `
                     <h3>Numero de requisicion: ${c.numberReq}

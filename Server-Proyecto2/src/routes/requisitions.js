@@ -87,9 +87,9 @@ router.post('/', (req, resp) => {
         const requisition = {
             numberReq: index + 1,
             date: date.getDate() + '/' + date.getMonth() + 1 + '/' + date.getFullYear(),
-            productsRequest: req.body.products
+            productsRequested: req.body.products
         }
-        if (supplies.removeProducts(resp, requisition.numberReq, requisition.productsRequest)) {
+        if (supplies.removeProducts(resp, requisition.numberReq, requisition.productsRequested)) {
             requisitionsData.requisitions[index] = requisition;
             writeRequisitionsFile(requisitionsPath, requisitionsData);
             resp.send(requisition);

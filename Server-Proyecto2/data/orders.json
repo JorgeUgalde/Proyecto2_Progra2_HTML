@@ -3,7 +3,7 @@
         {
             "numberOrd": 1,
             "date": "14/89/2022",
-            "productsRequested": [
+            "purchased": [
                 {
                     "id": 3,
                     "units": 15
@@ -13,7 +13,7 @@
         {
             "numberOrd": 2,
             "date": "114/7/2022",
-            "productsRequested": [
+            "purchased": [
               {
                 "id": 3,
                 "units": 15

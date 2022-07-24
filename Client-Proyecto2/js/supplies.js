@@ -12,6 +12,7 @@ function showSupplies(supplies) {
         supplyElement.dataset.id = c.id;
         // cargo el contenido
         supplyElement.innerHTML = `
+                    <img class="images" src="${c.img}">
                     <h3>${c.name}</h3>
                     <h3>Cantidad disponible: ${c.existence}</h3>
                     <button class="details-button">Ver detalles</button>
