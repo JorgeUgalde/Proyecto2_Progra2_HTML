@@ -1,19 +1,18 @@
 
-// Función para mostrar error
+// Show error
 function showError(message) {
     alert(message);
 }
 
+//If the register is correct redirects the user to the login page
 function handleLogin(resp) {
-    console.log(resp);
     window.location.replace('../index.html');
 
 };
 
 
-// Agrego el evento onclick al botón con el id add-button
+// Add a click event of the register button and get the email and password, then execute the post request
 document.getElementById('register-button').onclick = function () {
-    // Obtengo información del campo de entrada txt-name
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
@@ -25,8 +24,6 @@ document.getElementById('register-button').onclick = function () {
         "email": email,
         "password": password,
     });
-
-    // Ejecuto el método post
     executeRequest(
         'post',
         'http://localhost:3000/api/register',
@@ -36,8 +33,13 @@ document.getElementById('register-button').onclick = function () {
     );
 };
 
-const divHeader = document.getElementById("header");
+//Add a click event of the back button
+document.getElementById('back-button').onclick = () => {
+    history.go(-1);
+}
 
+// add event listener for the header, if user press a botton
+const divHeader = document.getElementById("header");
 divHeader.addEventListener('click', e => {
     if (e.target.nodeName === 'BUTTON') {
         if (e.target.classList.contains('requisitions-button')) {
@@ -52,9 +54,3 @@ divHeader.addEventListener('click', e => {
         }
     }
 });
-
-
-// Agrego el evento onclick al botón con el id back-button
-document.getElementById('back-button').onclick = () => {
-    history.go(-1);
-}

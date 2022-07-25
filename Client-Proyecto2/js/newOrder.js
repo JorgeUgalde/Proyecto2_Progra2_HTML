@@ -3,38 +3,33 @@ function newSupply(response) {
     window.location.replace('supplies.html');
 }
 
-const divSupplies = document.getElementById('supplies'); // obtengo el tag div
 
-// Función para desplegar cursos al usuario
+// Show the supplies to user
+const divSupplies = document.getElementById('supplies');
 function showSupplies(supplies) {
-    // creo un fragmento
     const fragment = document.createDocumentFragment();
-    // recorre la respuesta
     supplies.forEach(c => {
-
-        // creo un objeto de tipo artículo
         const supplieElement = document.createElement('article');
-        // defino el id del articulo
         supplieElement.dataset.id = c.id;
-        // cargo el contenido
         supplieElement.innerHTML = `
             <input class="checkBoxElements" type="checkbox">
             Prenda: ${c.name}
             <input class='existence'type="number" value="1" min="1" '>
             `;
-        fragment.appendChild(supplieElement); // agrego o concateno los elementos (curso)
+        fragment.appendChild(supplieElement); 
 
     });
-    divSupplies.appendChild(fragment); // cargo la lista de cursos (fragment) en el div
+    divSupplies.appendChild(fragment);
 }
-/* setear clase checkBox,  */
-// Función para mostrar error al usuario
+
+// show error
 function showError(message) {
     document.getElementById('supplies').innerHTML = message;
 }
 
-const divHeader = document.getElementById("header");
 
+// add event listener for the header, if user press a botton
+const divHeader = document.getElementById("header");
 divHeader.addEventListener('click', e => {
     if (e.target.nodeName === 'BUTTON') {
         if (e.target.classList.contains('requisitions-button')) {
@@ -50,6 +45,7 @@ divHeader.addEventListener('click', e => {
     }
 });
 
+// get the selected items and the quantity value of the order
 function getSelectedElements() {
     const elements = document.getElementsByClassName("checkBoxElements");
     const purchased = [];
@@ -71,12 +67,12 @@ function getSelectedElements() {
     return purchased;
 }
 
-// Agrego el evento onclick al botón con el id back-button
+//Add a click event of the back button
 document.getElementById('back-button').onclick = () => {
     history.go(-1);
 }
 
-// Agrego el evento onclick al botón con el id add-button
+//Add a click event of the create button and execute the post request
 document.getElementById('create-button').onclick = function () {
     // Ejecuto el método post
     const data = JSON.stringify({
@@ -92,11 +88,11 @@ document.getElementById('create-button').onclick = function () {
     );
 };
 
-// Agrego un evento para la carga de la página
+// Load the the information of the supplies
 document.addEventListener('DOMContentLoaded', () => {
     executeRequest(
         'get',
         'http://127.0.0.1:3000/api/supplies',
         showSupplies,
-        showError); // Llamo la función
+        showError); 
 });

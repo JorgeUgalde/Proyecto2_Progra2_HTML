@@ -1,31 +1,21 @@
-// Genera un objeto Router para el manejo de las rutas
 const { Router } = require("express");
-// Inicializa el Router
 const router = Router();
-
-// exporto el objeto router con sus verbos (get, post, put, delete)
 module.exports = router;
-
-// Importa el módulo joi
-const Joi = require('joi'); // En mayúscula porque retorna una clase
-// Importa el módulo fs
+const Joi = require('joi'); 
 const fs = require('fs');
 const supplies = require('./supplies.js');
 
-/* requisitions  */
 const requisitionsPath = './data/requisitions.json';
 let requisitionsData;
 
-
+//read the especific file
 function readRequisitionsFile(resp) {
-    // Cargamos los datos del archivo
     let fileData;
     try {
         fileData = fs.readFileSync(requisitionsPath, 'utf8');
     } catch (error) {
         return resp.status(404).send({ "error": "Datos del archivo no encontrados" });
     }
-    // Convertimos los datos en objeto
     try {
         requisitionsData = JSON.parse(fileData);
     } catch (error) {
@@ -33,7 +23,7 @@ function readRequisitionsFile(resp) {
     }
 }
 
-// método para escritura
+// write at the specific file
 function writeRequisitionsFile(filePath, fileContent) {
     const jsonString = JSON.stringify(fileContent, null, 2);
 
@@ -42,7 +32,7 @@ function writeRequisitionsFile(filePath, fileContent) {
     });
 }
 
-//Metodo para escribir archivo, se reutiliza el del inventario al recibir path y data
+//return all the information of the respect file
 router.get('/', (req, resp) => {
     readRequisitionsFile(resp);
     if (requisitionsData) {
@@ -50,7 +40,7 @@ router.get('/', (req, resp) => {
     }
 });
 
-
+//return only the information of the respect element
 router.get('/:numberReq', (req, resp) => {
     readRequisitionsFile(resp);
     if (requisitionsData) {
@@ -60,7 +50,7 @@ router.get('/:numberReq', (req, resp) => {
     }
 });
 
-// get requisitions id/ productos
+//return only the products of the respect element
 router.get('/:numberReq/products', (req, resp) => {
     readRequisitionsFile(resp);
     if (requisitionsData) {
@@ -71,6 +61,7 @@ router.get('/:numberReq/products', (req, resp) => {
 });
 
 
+// add a element at the respect file
 router.post('/', (req, resp) => {
     readRequisitionsFile(resp);
     if (requisitionsData) {
@@ -81,7 +72,6 @@ router.post('/', (req, resp) => {
         const result = schema.validate(req.body);
         if (result.error) return resp.status(400).send(result.error.details[0].message);
 
-        //fecha
         const date = new Date();
         const index = requisitionsData.requisitions.length;
         const requisition = {

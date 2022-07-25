@@ -1,14 +1,9 @@
-// Genera un objeto Router para el manejo de las rutas
 const { Router } = require("express");
-// Inicializa el Router
 const router = Router();
 
-// exporto el objeto router con sus verbos (get, post, put, delete)
 module.exports = router;
 
-// Importa el módulo joi
-const Joi = require('joi'); // En mayúscula porque retorna una clase
-// Importa el módulo fs
+const Joi = require('joi');
 const fs = require('fs')
 const supplies = require('./supplies.js');
 
@@ -16,16 +11,14 @@ const supplies = require('./supplies.js');
 const ordersPath = './data/orders.json';
 let ordersData;
 
-
+//read the especific file
 function readOrdersFile(resp) {
-    // Cargamos los datos del archivo
     let fileData;
     try {
         fileData = fs.readFileSync(ordersPath, 'utf8');
     } catch (error) {
         return resp.status(404).send({ "error": "Datos del archivo no encontrados" });
     }
-    // Convertimos los datos en objeto
     try {
         ordersData = JSON.parse(fileData);
     } catch (error) {
@@ -33,7 +26,7 @@ function readOrdersFile(resp) {
     }
 }
 
-// método para escritura
+// write at the specific file
 function writeRequisitionsFile(filePath, fileContent) {
     const jsonString = JSON.stringify(fileContent, null, 2);
 
@@ -42,7 +35,7 @@ function writeRequisitionsFile(filePath, fileContent) {
     });
 }
 
-//Metodo para escribir archivo, se reutiliza el del inventario al recibir path y data
+//return all the information of the respect file
 router.get('/', (req, resp) => {
     readOrdersFile(resp);
     if (ordersData) {
@@ -51,7 +44,7 @@ router.get('/', (req, resp) => {
 });
 
 
-// get order number
+//return only the information of the respect order
 router.get('/:numberOrd', (req, resp) => {
     readOrdersFile(resp);
     if (ordersData) {
@@ -61,8 +54,8 @@ router.get('/:numberOrd', (req, resp) => {
     }
 });
 
-// get requisitions id/ productos
-router.get('/api/orders/:numberOrd/products', (req, resp) => {
+//return only the products of the respect element
+router.get('/:numberOrd/products', (req, resp) => {
     readOrdersFile(resp);
     if (ordersData) {
         const order = ordersData.orders.find(o => o.numberOrd === parseInt(req.params.numberOrd));
@@ -71,6 +64,8 @@ router.get('/api/orders/:numberOrd/products', (req, resp) => {
     }
 });
 
+
+// add a element at the respect file
 router.post('/', (req, resp) => {
     readOrdersFile(resp);
     if (ordersData) {

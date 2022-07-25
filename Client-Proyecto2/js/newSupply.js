@@ -1,15 +1,15 @@
-// Función para agregar curso
+// New Supply
 function newSupply(supply) {
     window.alert(`${supply.name} agregado correctamente`);
     window.location.replace('supplies.html');
 }
 
-// Función para mostrar error
+// show error
 function showError(message) {
     document.getElementById('responseText').innerHTML = message;
 }
 
-// Agrego el evento onclick al botón con el id add-button
+//Add a click event of the add button, get the value of the name and url and execute the post request 
 document.getElementById('add-button').onclick = function () {
     // Obtengo información del campo de entrada txt-name
     const name = document.getElementById('txt-name').value;
@@ -19,7 +19,6 @@ document.getElementById('add-button').onclick = function () {
         "name": name, "img": url
     });
     console.log(data);
-    // Ejecuto el método post
     executeRequest(
         'post',
         'http://localhost:3000/api/supplies',
@@ -29,8 +28,8 @@ document.getElementById('add-button').onclick = function () {
     );
 };
 
+// add event listener for the header, if user press a botton
 const divHeader = document.getElementById("header");
-
 divHeader.addEventListener('click', e => {
     if (e.target.nodeName === 'BUTTON') {
         if (e.target.classList.contains('requisitions-button')) {
@@ -46,7 +45,7 @@ divHeader.addEventListener('click', e => {
     }
 });
 
-// Agrego el evento onclick al botón con el id back-button
+//Add a click event of the back button
 document.getElementById('back-button').onclick = () => {
     history.go(-1);
 }

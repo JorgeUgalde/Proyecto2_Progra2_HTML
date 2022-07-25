@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "Camisa de tirantes azul",
-      "existence": 33,
+      "existence": 35,
       "movements": [
         {
           "type": 1,
@@ -14,6 +14,11 @@
           "type": 2,
           "movementCode": 2,
           "movementQuantity": "4"
+        },
+        {
+          "type": 1,
+          "movementCode": 3,
+          "movementQuantity": "2"
         }
       ],
       "img": "https://i0.wp.com/rooseveltunited.com/wp-content/uploads/2021/02/Camisa-Tirantes-Gordos-podcast-azul-rey.jpeg?fit=1120%2C1280&ssl=1"
@@ -21,11 +26,16 @@
     {
       "id": 2,
       "name": "Camisa",
-      "existence": 3,
+      "existence": 5,
       "movements": [
         {
           "type": 2,
           "movementCode": 1,
+          "movementQuantity": "2"
+        },
+        {
+          "type": 1,
+          "movementCode": 3,
           "movementQuantity": "2"
         }
       ],
@@ -52,7 +62,7 @@
     {
       "id": 4,
       "name": "Medias ",
-      "existence": 3,
+      "existence": 1,
       "movements": [
         {
           "type": 1,
@@ -63,6 +73,11 @@
           "type": 2,
           "movementCode": 3,
           "movementQuantity": "3"
+        },
+        {
+          "type": 2,
+          "movementCode": 4,
+          "movementQuantity": "2"
         }
       ],
       "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuSrxOMFuPtUBGeq64j6fzLXJIFjKzddfhdQ&usqp=CAU"
@@ -70,9 +85,22 @@
     {
       "id": 5,
       "name": "Medias moradas",
+      "existence": 8,
+      "movements": [
+        {
+          "type": 1,
+          "movementCode": 2,
+          "movementQuantity": "8"
+        }
+      ],
+      "img": "https://www.esfantastica.com/1048-thickbox_default/medias-sexys-para-mujer-dakota.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Buzo",
       "existence": 0,
       "movements": [],
-      "img": "https://www.esfantastica.com/1048-thickbox_default/medias-sexys-para-mujer-dakota.jpg"
+      "img": "https://http2.mlstatic.com/D_NQ_NP_973472-MLA49262414859_032022-W.jpg"
     }
   ]
 }

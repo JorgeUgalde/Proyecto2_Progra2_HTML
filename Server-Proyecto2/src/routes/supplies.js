@@ -1,21 +1,15 @@
-// Genera un objeto Router para el manejo de las rutas
+
 const { Router } = require("express");
-// Inicializa el Router
 const router = Router();
 
-// exporto el objeto router con sus verbos (get, post, put, delete)
 module.exports = router;
 
-// Importa el módulo joi
-const Joi = require('joi'); // En mayúscula porque retorna una clase
-// Importa el módulo fs
+const Joi = require('joi'); 
 const fs = require('fs')
-
-/* requisitions  */
 const suppliesPath = './data/supplies.json';
 let suppliesData;
 
-// método para escritura
+// write at the specific file
 function fileWriter(filePath, fileContent) {
     const jsonString = JSON.stringify(fileContent, null, 2);
 
@@ -24,16 +18,14 @@ function fileWriter(filePath, fileContent) {
     });
 }
 
-
+//read the especific file
 function readSuppliesFile(resp) {
-    // Cargamos los datos del archivo
     let fileData;
     try {
         fileData = fs.readFileSync(suppliesPath, 'utf8');
     } catch (error) {
         return resp.status(404).send({ "error": "Datos del archivo no encontrados" });
     }
-    // Convertimos los datos en objeto
     try {
         suppliesData = JSON.parse(fileData);
     } catch (error) {
@@ -41,6 +33,7 @@ function readSuppliesFile(resp) {
     }
 }
 
+//return all the information of the respect file
 router.get('/', (req, resp) => {
     readSuppliesFile(resp);
     if (suppliesData) {
@@ -48,6 +41,7 @@ router.get('/', (req, resp) => {
     }
 });
 
+//return only the information of the respect element
 router.get('/:id', (req, resp) => {
     readSuppliesFile(resp);
     if (suppliesData) {
@@ -57,7 +51,7 @@ router.get('/:id', (req, resp) => {
     }
 });
 
-
+//return only the movements of the respect element
 router.get('/:id/movements', (req, resp) => {
     readSuppliesFile(resp);
     if (suppliesData) {
@@ -68,6 +62,7 @@ router.get('/:id/movements', (req, resp) => {
 });
 
 
+// add a element at the respect file
 router.post('/', (req, resp) => {
     readSuppliesFile(resp);
     if (suppliesData) {
@@ -89,7 +84,7 @@ router.post('/', (req, resp) => {
     }
 });
 
-
+//modify a especific element
 router.put('/:id', (req, resp) => {
     readSuppliesFile(resp);
     if (suppliesData) {
@@ -105,7 +100,7 @@ router.put('/:id', (req, resp) => {
     }
 });
 
-
+//delete movementes of especific element
 router.delete('/:id', (req, resp) => {
     readSuppliesFile(resp);
     if (suppliesData) {
@@ -119,6 +114,7 @@ router.delete('/:id', (req, resp) => {
     }
 });
 
+// validate the name and link of the img of the supply
 function validateSupply(supply) {
     const schema = Joi.object({
         name: Joi.string().min(3).required(),
@@ -128,6 +124,7 @@ function validateSupply(supply) {
 }
 
 
+// remove products of the especific element
 module.exports.removeProducts = removeProducts;
 function removeProducts(resp, numberReq, productsRequested) {
     readSuppliesFile(resp);
@@ -160,9 +157,9 @@ function removeProducts(resp, numberReq, productsRequested) {
     fileWriter(suppliesPath, suppliesData);
     return true;
 }
+
+// add products of the especific element
 module.exports.addProducts = addProducts;
-
-
 function addProducts(resp, numberOrd, productsOrdered) {
     let movement, product;
     for (let i = 0; i < productsOrdered.length; i++) {

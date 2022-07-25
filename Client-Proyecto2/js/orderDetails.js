@@ -3,45 +3,42 @@ function details(order) {
     window.location.replace('supplies.html');
 }
 
-// Función para mostrar error
+// Show error
 function showError(message) {
     document.getElementById('responseText').innerHTML = message;
 }
 
-const divOrder = document.getElementById('orderDetails'); // obtengo el tag div
-// Función para desplegar cursos al usuario
+// Show the order details
+const divOrder = document.getElementById('orderDetails'); 
 function showOrder(order) {
-    // creo un fragmento
     const fragment = document.createDocumentFragment(); 
     const orderElement = document.createElement('article');
-    // defino el id del articulo
     orderElement.dataset.id = order.numberOrd;
-    // cargo el contenido
     orderElement.innerHTML = `
                     <h2>Number de orden: ${order.numberOrd}</h3>
                     <h3>Fecha: ${order.date}
                     <br>Productos:
                     </h3>
                     `;
-    fragment.appendChild(orderElement); // agrego o concateno los elementos (curso)
+    fragment.appendChild(orderElement);
     order.purchased.forEach(m => {
         const product = document.createElement('article');
         product.dataset.id = `${order.numberOrd}-${m.id}`
         product.innerHTML = `
                     <h5>ID: ${m.id}<br>Unidades: ${m.units}</h5>
                     `;
-        fragment.appendChild(product); // agrego o concateno los elementos (curso)
+        fragment.appendChild(product); 
     });
-    divOrder.appendChild(fragment); // cargo la lista de cursos (fragment) en el div
+    divOrder.appendChild(fragment); 
 }
 
 
-// Agrego el evento onclick al botón con el id back-button
+//Add a click event of the back button
 document.getElementById('back-button').onclick = () => {
     history.go(-1);
 }
 
-// Agrego un evento para la carga de la página que recupere y llene los datos del curso
+// Load the the information of the order
 document.addEventListener('DOMContentLoaded', () => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -53,8 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
         showError); // Llamo la función
 });
 
+// add event listener for the header, if user press a botton
 const divHeader = document.getElementById("header");
-
 divHeader.addEventListener('click', e => {
     if (e.target.nodeName === 'BUTTON') {
         if (e.target.classList.contains('requisitions-button')) {

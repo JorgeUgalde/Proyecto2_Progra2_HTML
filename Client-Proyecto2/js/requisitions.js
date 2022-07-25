@@ -1,36 +1,26 @@
-const divRequisitions = document.getElementById('requisitions'); // obtengo el tag div
 
-// Función para desplegar cursos al usuario
+// Show the requisitions to the user
+const divRequisitions = document.getElementById('requisitions'); 
 function showRequisitions(requisitions) {
-    // creo un fragmento
     const fragment = document.createDocumentFragment();
-    // recorre la respuesta
     requisitions.forEach(c => {
-        // creo un objeto de tipo artículo
         const requisitionElement = document.createElement('article');
-        // defino el id del articulo
         requisitionElement.dataset.id = c.numberReq;
-        // cargo el contenido
         requisitionElement.innerHTML = `
                     <h3>Numero de requisicion: ${c.numberReq}
                     <br>fecha de requisicion: ${c.date}</h3>
                     <button class="details-button">Ver detalle</button>`;
-        fragment.appendChild(requisitionElement); // agrego o concateno los elementos (curso)
+        fragment.appendChild(requisitionElement); 
     });
-    divRequisitions.appendChild(fragment); // cargo la lista de cursos (fragment) en el div
+    divRequisitions.appendChild(fragment); 
 }
 
-// Función para mostrar error al usuario
+//Show Error
 function showError(message) {
     document.getElementById('requisitions').innerHTML = message;
 }
 
-// Función para eliminar un curso
-function deleteRequisition(context) {
-    divRequisitions.removeChild(context.node);
-}
-
-// Agrego el evento a cada botón de borrar con la clase delete-button
+//Add a click event of the details button and redirects the user to the requisitionDetails page
 divRequisitions.addEventListener('click', e => {
     if (e.target.nodeName === 'BUTTON') {
         if (e.target.classList.contains('details-button')) {
@@ -39,13 +29,12 @@ divRequisitions.addEventListener('click', e => {
         }
     }
 });
-
-// Agrego el evento click al botón con el id new-button
+//Add a click event of the new requisition button and redirects the user to the newRequisition page
 document.getElementById('new-requisition').onclick = () => {
     location.href = 'newRequisition.html';
 };
 
-// Agrego un evento para la carga de la página
+// Load the the requisitions
 document.addEventListener('DOMContentLoaded', () => {
     executeRequest(
         'get',
@@ -54,12 +43,13 @@ document.addEventListener('DOMContentLoaded', () => {
         showError); // Llamo la función
 });
 
-// Agrego el evento onclick al botón con el id back-button
+//Add a click event of the back button
 document.getElementById('back-button').onclick = () => {
     history.go(-1);
 }
-const divHeader = document.getElementById("header");
 
+// add event listener for the header, if user press a botton
+const divHeader = document.getElementById("header");
 divHeader.addEventListener('click', e => {
     if (e.target.nodeName === 'BUTTON') {
         if (e.target.classList.contains('requisitions-button')) {

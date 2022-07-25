@@ -1,24 +1,21 @@
 
-
+// details
 function details(supply) {
     window.alert(`${supply.name} Detalles`);
     window.location.replace('supplies.html');
 }
 
-// Función para mostrar error
+// show error
 function showError(message) {
     document.getElementById('responseText').innerHTML = message;
 }
 
-const divSupply = document.getElementById('supply'); // obtengo el tag div
-// Función para desplegar cursos al usuario
+// Show the details of the supply
+const divSupply = document.getElementById('supply'); 
 function showRequisition(supply) {
-    // creo un fragmento
     const fragment = document.createDocumentFragment();
     const supplyElement = document.createElement('article');
-    // defino el id del articulo
     supplyElement.dataset.id = supply.id;
-    // cargo el contenido
     supplyElement.innerHTML = `
                     <h2>Prenda: ${supply.name}</h3>
                     <h3>Cantidad disponible: ${supply.existence}
@@ -26,7 +23,7 @@ function showRequisition(supply) {
                     <br>Movimientos:
                     </h3>
                     `;
-    fragment.appendChild(supplyElement); // agrego o concateno los elementos (curso)
+    fragment.appendChild(supplyElement);
     supply.movements.forEach(m => {
         const movement = document.createElement('article');
         movement.dataset.id = `${supply.id}-${m.movementCode}`
@@ -36,8 +33,6 @@ function showRequisition(supply) {
         }else{
             movementType = "Orden";
         } 
-
-    
         movement.innerHTML = `
                     <h5>Tipo: ${movementType}<br>Codigo: ${m.movementCode}<br>Cantidad: ${m.movementQuantity}</h5>
                     `;
@@ -48,12 +43,12 @@ function showRequisition(supply) {
 
 
 
-// Agrego el evento onclick al botón con el id back-button
+//Add a click event of the back button
 document.getElementById('back-button').onclick = () => {
     history.go(-1);
 }
 
-// Agrego un evento para la carga de la página que recupere y llene los datos del curso
+// Load the the information of the supply
 document.addEventListener('DOMContentLoaded', () => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -62,12 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
         'get',
         `http://127.0.0.1:3000/api/supplies/${id}`,
         showRequisition,
-        showError); // Llamo la función
+        showError); 
 });
 
 
+// add event listener for the header, if user press a botton
 const divHeader = document.getElementById("header");
-
 divHeader.addEventListener('click', e => {
     if (e.target.nodeName === 'BUTTON') {
         if (e.target.classList.contains('requisitions-button')) {

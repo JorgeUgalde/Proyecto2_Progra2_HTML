@@ -1,21 +1,13 @@
-// Genera un objeto Router para el manejo de las rutas
 const { Router } = require("express");
-// Inicializa el Router
 const router = Router();
-
-// exporto el objeto router con sus verbos (get, post, put, delete)
 module.exports = router;
-
-// Importa el módulo joi
 const Joi = require('joi'); // En mayúscula porque retorna una clase
-// Importa el módulo fs
 const fs = require('fs')
 
-/* requisitions  */
 const registerPath = './data/users.json';
 let registerData;
 
-// método para escritura
+// write at the specific file
 function fileWriter(registerPath, fileContent) {
     const jsonString = JSON.stringify(fileContent, null, 2);
 
@@ -24,16 +16,14 @@ function fileWriter(registerPath, fileContent) {
     });
 }
 
-
+//read the especific file
 function readUsersFile(resp) {
-    // Cargamos los datos del archivo
     let fileData;
     try {
         fileData = fs.readFileSync(registerPath, 'utf8');
     } catch (error) {
         return resp.status(404).send({ "error": "Datos del archivo no encontrados" });
     }
-    // Convertimos los datos en objeto
     try {
         registerData = JSON.parse(fileData);
     } catch (error) {
@@ -41,6 +31,7 @@ function readUsersFile(resp) {
     }
 }
 
+// add a user account at the sistem
 router.post('/', (req, resp) => {
     readUsersFile(resp);
     if (registerData) {
@@ -64,7 +55,7 @@ router.post('/', (req, resp) => {
 });
 
 
-
+// validate if the user email and passwords are correct
 function validateUser(user) {
     const schema = Joi.object({
         email: Joi.string().min(3).required(),

@@ -37,6 +37,16 @@
           "units": "3"
         }
       ]
+    },
+    {
+      "numberReq": 4,
+      "date": "24/7/2022",
+      "productsRequested": [
+        {
+          "id": "4",
+          "units": "2"
+        }
+      ]
     }
   ]
 }

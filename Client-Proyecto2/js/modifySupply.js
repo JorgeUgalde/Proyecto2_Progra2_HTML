@@ -1,21 +1,21 @@
-// Función para modificar curso
+//Modify supply
 function modifySupply(supply) {
     window.alert(`${supply.name} modifcado correctamente`);
     window.location.replace('supplies.html');
 }
 
-// Función para mostrar error
+// show error
 function showError(message) {
     document.getElementById('responseText').innerHTML = message;
 }
 
-// Función para cargar datos del curso
+//Show the id and name of the supply
 function showSupply(supply) {
     document.getElementById('id').value = supply.id;
     document.getElementById('txt-name').value = supply.name;
 }
 
-// Agrego el evento onclick al botón con el id modify-button
+// Add a click event of the back button for modify supply and execute the modify request
 document.getElementById('modify-button').onclick = () => {
     const id = document.getElementById('id').value;
     const name = document.getElementById('txt-name').value;
@@ -29,12 +29,12 @@ document.getElementById('modify-button').onclick = () => {
     )
 }
 
-// Agrego el evento onclick al botón con el id back-button
+// add a click event on the back button
 document.getElementById('back-button').onclick = () => {
     history.go(-1);
 }
 
-// Agrego un evento para la carga de la página que recupere y llene los datos del curso
+// Load the the information of the supply
 document.addEventListener('DOMContentLoaded', () => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -43,11 +43,11 @@ document.addEventListener('DOMContentLoaded', () => {
         'get',
         `http://127.0.0.1:3000/api/supplies/${id}`,
         showSupply,
-        showError); // Llamo la función
+        showError); 
 });
 
+// add event listener for the header, if user press a botton
 const divHeader = document.getElementById("header");
-
 divHeader.addEventListener('click', e => {
     if (e.target.nodeName === 'BUTTON') {
         if (e.target.classList.contains('requisitions-button')) {

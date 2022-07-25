@@ -1,39 +1,21 @@
-// Genera un objeto Router para el manejo de las rutas
 const { Router } = require("express");
-// Inicializa el Router
 const router = Router();
-
-// exporto el objeto router con sus verbos (get, post, put, delete)
 module.exports = router;
 
-// Importa el módulo joi
-const Joi = require('joi'); // En mayúscula porque retorna una clase
-// Importa el módulo fs
+const Joi = require('joi'); 
 const fs = require('fs')
 
-/* requisitions  */
 const loginPath = './data/users.json';
 let loginData;
 
-// método para escritura
-function fileWriter(loginPath, fileContent) {
-    const jsonString = JSON.stringify(fileContent, null, 2);
-
-    fs.writeFile(loginPath, jsonString, (error) => {
-        console.log("Error writing file: ", error);
-    });
-}
-
-
+//read the especific file
 function readUsersFile(resp) {
-    // Cargamos los datos del archivo
     let fileData;
     try {
         fileData = fs.readFileSync(loginPath, 'utf8');
     } catch (error) {
         return resp.status(404).send({ "error": "Datos del archivo no encontrados" });
     }
-    // Convertimos los datos en objeto
     try {
         loginData = JSON.parse(fileData);
     } catch (error) {
@@ -41,7 +23,7 @@ function readUsersFile(resp) {
     }
 }
 
-
+// verify if the user credentias exist and are correct
 router.post('/', (req, resp) => {
     readUsersFile(resp);
     if (loginData) {
@@ -55,7 +37,7 @@ router.post('/', (req, resp) => {
     }
 });
 
-
+// validate if the email and password are valids
 function validateUser(user) {
     const schema = Joi.object({
         email: Joi.string().min(3).required(),

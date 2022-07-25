@@ -1,32 +1,26 @@
-const divOrders = document.getElementById('orders'); // obtengo el tag div
 
-// Función para desplegar cursos al usuario
+// Show the orders to user
+const divOrders = document.getElementById('orders'); 
 function showOrders(orders) {
-    // creo un fragmento
     const fragment = document.createDocumentFragment();
-    // recorre la respuesta
     orders.forEach(c => {
-        // creo un objeto de tipo artículo
         const orderElement = document.createElement('article');
-        // defino el id del articulo
         orderElement.dataset.id = c.numberOrd;
-        // cargo el contenido
         orderElement.innerHTML = `
                     <h3>Numero de orden: ${c.numberOrd}
                     <br>fecha de orden: ${c.date}</h3>
                     <button class="details-button">Ver detalle</button>`;
-        fragment.appendChild(orderElement); // agrego o concateno los elementos (curso)
+        fragment.appendChild(orderElement); 
     });
-    divOrders.appendChild(fragment); // cargo la lista de cursos (fragment) en el div
+    divOrders.appendChild(fragment); 
 }
 
-// Función para mostrar error al usuario
+//Show error
 function showError(message) {
     document.getElementById('orders').innerHTML = message;
 }
 
-
-// Agrego el evento a cada botón de borrar con la clase delete-button
+//Add a click event of the details button and redirect to orderDetails page
 divOrders.addEventListener('click', e => {
     if (e.target.nodeName === 'BUTTON') {
         if (e.target.classList.contains('details-button')) {
@@ -36,22 +30,27 @@ divOrders.addEventListener('click', e => {
     }
 });
 
-// Agrego el evento click al botón con el id new-button
+//Add a click event of the new order button and redirect to newOrder page
 document.getElementById('new-order').onclick = () => {
     location.href = 'newOrder.html';
 };
 
-// Agrego un evento para la carga de la página
+// Load the the information of the orders
 document.addEventListener('DOMContentLoaded', () => {
     executeRequest(
         'get',
         'http://127.0.0.1:3000/api/orders',
         showOrders,
-        showError); // Llamo la función
+        showError);
 });
 
-const divHeader = document.getElementById("header");
+//Add a click event of the back button
+document.getElementById('back-button').onclick = () => {
+    history.go(-1);
+}
 
+// add event listener for the header, if user press a botton
+const divHeader = document.getElementById("header");
 divHeader.addEventListener('click', e => {
     if (e.target.nodeName === 'BUTTON') {
         if (e.target.classList.contains('requisitions-button')) {
@@ -67,7 +66,3 @@ divHeader.addEventListener('click', e => {
     }
 });
 
-// Agrego el evento onclick al botón con el id back-button
-document.getElementById('back-button').onclick = () => {
-    history.go(-1);
-}
